@@ -1,2 +1,0 @@
-# subway-surfers-lightweight
- 
