@@ -1,7 +1,5 @@
 .down {
-	margin: 15px 0 0 15px;
-	margin-top: 85vh;
-	position: absolute;
+	
 	text-align: center;
 }
 .down p {
@@ -10,18 +8,19 @@
 }
 .btn-con {
 	padding: 10px 20px;
+	margin: 15px 0 0 15px;
+	margin-top: 94vh;
+	position: absolute;
 	background: #1b689c;
 	cursor: pointer;
 	color: #fff;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: .7rem;
-
 	border-top: 20px;
 	border: none;
 	border-radius: 0 10px 0 10px;
 	text-decoration: none;
-
 	transition: all 0.3s ease-in-out;
 }
 
