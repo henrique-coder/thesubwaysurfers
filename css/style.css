@@ -1,35 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
-.button {
-    background-color: #002b50;
-    border: none;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 60px;
-    height: 32px;
-	position: absolute;
-	margin-top: 92.5vh;
-	margin-left: 1vw;
-    display: inline-flex;
-    align-items: center;
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+html, body {
     overflow: hidden;
-    width: auto;
-    max-width: 32px;
-    transition: max-width 0.5s ease-in-out;
 }
-.button:hover {
-    max-width: 300px;
-}
-.icon {
-    font-family: 'FontAwesome';
-    font-size: 16px;
-    margin-right: 16px;
-    padding: 0 8px;
-    display: flex;
-    align-items: center;
-}
-.text {
-    white-space: nowrap;
-    padding-right: 16px;
+body {
     font-family: 'Roboto', sans-serif;
-	text-transform: uppercase;
+}
+#bg {
+    width: 100vw;
+    height: 120vh;
+    
+}
+
+.logoImg {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+}
+
+.btn-play {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, #FEFF27, #F28B21);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.432);
+    cursor: pointer;
+    transition: 0.5s;
+    text-align: center;
+    line-height: 50px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.btn-play:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.432), 0 0 40px rgba(0, 0, 0, 0.432) inset;
+}
+
+.info {
+    position: absolute;
+    top: 81%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    color: #fff;
+}
+
+.credits-btn {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.credits-btn:hover {
+    color: #FEFF27;
 }
