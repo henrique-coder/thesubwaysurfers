@@ -6,13 +6,13 @@ html, body {
 body {
     font-family: 'Roboto', sans-serif;
 }
-#bg {
+#ss_background {
     width: 100vw;
     height: 120vh;
     
 }
 
-.logoImg {
+.ss_logo {
     position: absolute;
     top: 30%;
     left: 50%;
