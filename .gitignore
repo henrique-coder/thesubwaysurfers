@@ -1,13 +1,18 @@
 # IDE
 .idea
 .venv
+
+# Cache
 __pycache__
+.ruff_cache
+.pytest_cache
 
 # Directories
 .debug
 
 # Files
-# ...
+dev.py
+demo.cast
 
 # Extensions
 *.env
