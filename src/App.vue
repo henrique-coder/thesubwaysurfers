@@ -108,8 +108,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 0.6rem 1rem;
-  background: linear-gradient(180deg, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.8) 60%, transparent 100%);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
   transition: opacity 0.25s, transform 0.25s;
 }
 
