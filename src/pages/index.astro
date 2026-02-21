@@ -1,8 +1,4 @@
 ---
-/**
- * Game source URL - ufreegame.net hosts web-playable Subway Surfers builds
- * Berlin map was chosen for stability and consistent availability
- */
 const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
 ---
 
@@ -10,7 +6,6 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- viewport-fit=cover enables edge-to-edge display on notched devices (iPhone X+) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Play Subway Surfers Berlin online" />
     <meta name="theme-color" content="#0a0a0a" />
@@ -19,7 +14,6 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <title>Subway Surfers</title>
-    <!-- Preconnect to Google Fonts to reduce latency on font fetch -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -28,14 +22,12 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
     <div class="app">
       <header class="bar" id="bar">
         <div class="logo">
-          <!-- Empty alt for decorative image - logo text provides context -->
           <img src="/logo.png" alt="" class="logo-img" width="28" height="28" />
           <span class="logo-text">Subway Surfers</span>
         </div>
         <div class="controls">
           <span class="badge">Berlin</span>
           <button class="btn" id="fs-btn" aria-label="Toggle fullscreen">
-            <!-- SVG icon is dynamically swapped based on fullscreen state -->
             <svg id="fs-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>
             </svg>
@@ -48,13 +40,6 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         <span>Loading...</span>
       </div>
 
-      <!--
-        Iframe sandbox restrictions:
-        - allow-scripts: Game requires JS execution
-        - allow-same-origin: Needed for game's internal storage/cookies
-        - allow-pointer-lock: Required for mouse capture in gameplay
-        Note: Intentionally omitting allow-top-navigation to prevent redirects
-      -->
       <iframe
         id="game"
         src={GAME_URL}
@@ -71,34 +56,19 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
       const fsBtn = document.getElementById('fs-btn')
       const fsIcon = document.getElementById('fs-icon')
 
-      let hideTimer: ReturnType<typeof setTimeout>
+      let hideTimer
 
-      /**
-       * Resets the auto-hide timer for the header bar.
-       * Called on any user interaction (mousemove, touchstart).
-       * Bar hides after 3s of inactivity to maximize game viewport.
-       */
       const resetTimer = () => {
         bar?.classList.remove('hide')
         clearTimeout(hideTimer)
         hideTimer = setTimeout(() => bar?.classList.add('hide'), 3000)
       }
 
-      /**
-       * Iframe load handler - hides loader and focuses the game.
-       * 300ms delay on focus allows iframe content to fully initialize,
-       * preventing focus from being stolen back by the parent document.
-       */
       game?.addEventListener('load', () => {
         loader?.classList.add('hidden')
         setTimeout(() => game.focus(), 300)
       })
 
-      /**
-       * Fullscreen toggle using native Fullscreen API.
-       * Requests fullscreen on documentElement (not iframe) to include
-       * the header bar in fullscreen mode for user control access.
-       */
       fsBtn?.addEventListener('click', async () => {
         try {
           if (!document.fullscreenElement) {
@@ -106,34 +76,24 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
           } else {
             await document.exitFullscreen()
           }
-        } catch {
-          // Silently fail - fullscreen may be blocked by browser policy
-        }
+        } catch {}
       })
 
-      /**
-       * Syncs fullscreen icon with actual fullscreen state.
-       * Handles cases where user exits fullscreen via Escape key
-       * rather than clicking the button.
-       */
       document.addEventListener('fullscreenchange', () => {
         const isFs = !!document.fullscreenElement
         if (fsIcon) {
-          // Swap between expand and collapse icon paths
           fsIcon.innerHTML = isFs
             ? '<path d="M8 3v3a2 2 0 0 1-2 2H3M21 8h-3a2 2 0 0 1-2-2V3M3 16h3a2 2 0 0 1 2 2v3M16 21v-3a2 2 0 0 1 2-2h3"/>'
             : '<path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/>'
         }
       })
 
-      // Initialize auto-hide behavior
       document.addEventListener('mousemove', resetTimer)
       document.addEventListener('touchstart', resetTimer)
       resetTimer()
     </script>
 
     <style>
-      /* Reset - minimal reset for consistent cross-browser rendering */
       *, *::before, *::after {
         margin: 0;
         padding: 0;
@@ -142,7 +102,7 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
 
       html, body {
         height: 100%;
-        overflow: hidden; /* Prevent scroll - game is fullscreen */
+        overflow: hidden;
         font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
         background: #0a0a0a;
         color: #fff;
@@ -151,10 +111,9 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
 
       .app {
         position: fixed;
-        inset: 0; /* Shorthand for top/right/bottom/left: 0 */
+        inset: 0;
       }
 
-      /* Header bar - overlays game, auto-hides after 3s */
       .bar {
         position: absolute;
         top: 0;
@@ -171,7 +130,7 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
       .bar.hide {
         opacity: 0;
         transform: translateY(-100%);
-        pointer-events: none; /* Allow clicks to pass through to game */
+        pointer-events: none;
       }
 
       .logo {
@@ -187,7 +146,7 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
       .logo-text {
         font-size: 0.9rem;
         font-weight: 700;
-        letter-spacing: -0.02em; /* Tighter tracking for display text */
+        letter-spacing: -0.02em;
       }
 
       .controls {
@@ -196,7 +155,6 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         gap: 0.6rem;
       }
 
-      /* Map indicator badge - purple theme matches game aesthetic */
       .badge {
         padding: 0.3rem 0.7rem;
         background: rgba(139, 92, 246, 0.15);
@@ -204,7 +162,7 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         border-radius: 20px;
         font-size: 0.7rem;
         font-weight: 600;
-        color: #c4b5fd; /* Tailwind violet-300 */
+        color: #c4b5fd;
       }
 
       .btn {
@@ -231,7 +189,6 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         transform: scale(0.95);
       }
 
-      /* Loading overlay - covers game until iframe loads */
       .loader {
         position: absolute;
         inset: 0;
@@ -254,7 +211,7 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         width: 36px;
         height: 36px;
         border: 3px solid rgba(139, 92, 246, 0.2);
-        border-top-color: #8b5cf6; /* Tailwind violet-500 */
+        border-top-color: #8b5cf6;
         border-radius: 50%;
         animation: spin 0.7s linear infinite;
       }
@@ -268,14 +225,12 @@ const GAME_URL = 'https://files.ufreegame.net/1024/subway-surfers-berlin/'
         color: rgba(255, 255, 255, 0.5);
       }
 
-      /* Game iframe - fills entire viewport behind UI */
       .frame {
         width: 100%;
         height: 100%;
         border: none;
       }
 
-      /* Mobile: hide logo text to save horizontal space */
       @media (max-width: 480px) {
         .logo-text {
           display: none;
